@@ -1,0 +1,62 @@
+[
+  {
+    "type": "container",
+    "title": "Registry",
+    "description": "Docker image registry",
+    "categories": ["docker"],
+    "platform": "linux",
+    "logo": "https://cloudinovasi.id/assets/img/logos/registry.png",
+    "image": "registry:latest",
+    "ports": [
+      "5000/tcp"
+    ],
+    "volumes": ["/var/lib/registry"]
+  },
+  {
+    "type": "container",
+    "title": "ContentBox",
+    "description": "Open-source modular CMS",
+    "categories": ["CMS"],
+    "platform": "linux",
+    "logo": "https://cloudinovasi.id/assets/img/logos/ortussolutions-contentbox.png",
+    "image": "ortussolutions/contentbox:latest",
+    "env": [
+      {
+        "name": "express",
+        "set": "true"
+      },
+      {
+        "name": "install",
+        "set": "true"
+      },
+      {
+        "name": "CFENGINE",
+        "set": "lucee@4.5"
+      }
+    ],
+    "ports": [
+      "8080/tcp", "8443/tcp"
+    ],
+    "volumes": ["/data/contentbox/db", "/app/includes/shared/media"]
+  },
+  {
+    "type": "stack",
+    "title": "Wordpress",
+    "description": "Wordpress setup with a MySQL database",
+    "note": "Deploys a Wordpress instance connected to a MySQL database.",
+    "categories": ["CMS"],
+    "platform": "linux",
+    "logo": "https://cloudinovasi.id/assets/img/logos/wordpress.png",
+    "repository": {
+      "url": "https://github.com/portainer/templates",
+      "stackfile": "stacks/wordpress/docker-stack.yml"
+    },
+    "env": [
+      {
+        "name": "MYSQL_ROOT_PASSWORD",
+        "label": "Database root password",
+        "description": "Password used by the MySQL root user."
+      }
+    ]
+  }
+]
